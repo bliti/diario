@@ -1,6 +1,7 @@
 from django.views.generic import TemplateView
 from django.shortcuts import redirect, render
 from django.core.urlresolvers import reverse_lazy
+from .forms import EntrarForm
 
 
 class InicioView(TemplateView):
@@ -18,4 +19,19 @@ class InicioView(TemplateView):
 
 
 class EntrarView(TemplateView):
-    template_name = 'entrar.html'
+    
+    
+    def get(self, request, *args, **kwargs):
+        """
+        show the login form
+        """
+        return render(self.request, 'entrar.html', {"form": EntrarForm()})
+
+
+    def post(self, request, *args, **kwargs):
+        """
+        check if login is successful and redir to dashboard if
+        else show the form again
+        """
+        pass
+
