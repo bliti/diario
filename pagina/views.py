@@ -33,5 +33,17 @@ class EntrarView(TemplateView):
         check if login is successful and redir to dashboard if
         else show the form again
         """
-        pass
+        form = EntrarForm(self.request.POST)
+        
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+            return redirect(reverse_lazy('dashboard'))
+        
+        return render(self.request, 'entrar.html', {"form": EntrarForm()})
+
+
+class DashboardView(TemplateView):
+    template_name = 'dashboard.html'
+            
 
