@@ -47,6 +47,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'registration',
     'pagina',
 )
 
@@ -93,3 +94,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+
+#django-registration
+REGISTRATION_OPEN = True
+
+LOGIN_REDIRECT_URL = '/dashboard/'
