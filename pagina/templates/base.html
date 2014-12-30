@@ -1,37 +1,61 @@
 {% load i18n %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
-    <link rel="stylesheet" href="{{ STATIC_URL }}style.css" />
-    <title>{% block title %}User test{% endblock %}</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <title>{% block title %}Diario{% endblock %}</title>
+	
+<style>
+#header {
+	padding-top: 30px;
+}
+
+td {
+	padding-top: 10px;
+}
+	
+	
+</style>
 </head>
 
 <body>
-    <div id="header">
-    {% block header %}
-    <a href="{% url 'index' %}">{% trans "Home" %}</a> | 
+	<div class="container">
+		<div class="col-sm-12">
+		    <div id="header">
+		    {% block header %}
+		    <a href="{% url 'index' %}">{% trans "Inicio" %}</a> | 
 
-    {% if user.is_authenticated %}
-        {% trans "Logged in" %}: {{ user.username }} 
-        (<a href="{% url 'auth_logout' %}">{% trans "Log out" %}</a> | 
-        <a href="{% url 'auth_password_change' %}">{% trans "Change password" %}</a>)
-    {% else %}
-       <a href="{% url 'auth_login' %}">{% trans "Log in" %}</a>
-    {% endif %}
-    <hr />
-    {% endblock %}
-    </div>
+		    {% if user.is_authenticated %}
+		        {% trans "Logged in" %}: {{ user.username }} 
+		        ( <a href="{% url 'dashboard' %}">{% trans "Dashboard" %}</a> | 
+				<a href="{% url 'auth_logout' %}">{% trans "Salir" %}</a> | 
+		        <a href="{% url 'auth_password_change' %}">{% trans "Cambiar contrase&ntilde;a" %}</a> )
+		    {% else %}
+		       <a href="{% url 'auth_login' %}">{% trans "Entrar" %}</a>
+		    {% endif %}
+		    <hr />
+		    {% endblock %}
+		    </div>
+		</div>
+	</div>
 
     <div id="content">
+		
     {% block content %}{% endblock %}
     </div>
 
+
+<div class="container">
+	<div class="col-sm-12">
     <div id="footer">
     {% block footer %}
-        <hr />
+        <hr>
+		&copy; ASIMUV
     {% endblock %}
     </div>
+</div>
+</div>
 </body>
 
 </html>
