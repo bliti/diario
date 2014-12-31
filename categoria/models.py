@@ -1,5 +1,7 @@
 from django.db import models
-#from django.auth import User
+from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
+
 
 class Categoria(models.Model):
     """
