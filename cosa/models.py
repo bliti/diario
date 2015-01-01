@@ -11,7 +11,7 @@ class Cosa(models.Model):
     cantidad = models.IntegerField() #todo es en centavos.
     fecha = models.DateTimeField(auto_now_add=True)
     comentario = models.TextField(null=True)
-    categoria = models.ForeignKey(Categoria)
+    categoria = models.TextField()
     user = models.ForeignKey(User)
     
     class Meta:
@@ -19,8 +19,4 @@ class Cosa(models.Model):
     
     
     def __unicode__(self):
-        return self.cantidad
-    
-    
-    def get_absolute_url(self):
-        return reverse('cosa-detail', kwargs={'pk': self.pk})
+        return '{0}{1}'.format(self.categoria, self.cantidad)
