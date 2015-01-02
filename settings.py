@@ -50,6 +50,7 @@ INSTALLED_APPS = (
     'registration',
     'pagina',
     'cosa',
+    'categoria',
 )
 
 MIDDLEWARE_CLASSES = (

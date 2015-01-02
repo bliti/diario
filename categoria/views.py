@@ -1,3 +1,5 @@
-from django.shortcuts import render
+from django.views.generic import TemplateView
 
-# Create your views here.
+
+class CrearCategoriaView(TemplateView):
+    template_name = "crear_categoria.html"

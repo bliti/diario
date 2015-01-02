@@ -12,7 +12,7 @@ class IndexView(TemplateView):
 
 
 class DashboardView(TemplateView):
-    template_name = 'dashboard.html'
+    template_name = 'dashboard_main.html'
     form_class = CrearCosaForm()
     
     def get(self, request, *args, **kwargs):
