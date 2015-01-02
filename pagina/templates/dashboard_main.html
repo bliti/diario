@@ -1,0 +1,53 @@
+{% extends "dashboard.html" %}
+
+{% block main %}
+	  <div class="container">
+	  	<div class="col-sm-4">
+			<p class="lead">Crear Nuevo</p>
+		
+			<form class="form">
+				{% csrf_token %}
+			  
+				{{form.as_p}}
+			  
+			  
+			  <button type="submit" class="btn btn-primary">Crear</button>
+			</form>
+		
+		
+		</div>
+	  </div>
+	  
+	  <div class="container diario">
+		  <div class="col-sm-12">
+  			<p class="lead">Ultimos</p>
+			  
+		  {% if cosas %}
+		  
+		  <div class="table-responsive">
+		    <table class="table table-striped">
+		      <tr>
+				  <th>Cantidad</th> <th>Categoria</th> <th>Fecha</th> <th>Comentario</th>
+              </tr>
+		  
+		      {% for cosa in cosas %}
+			  <tr>
+			  
+			  	<td>{{cosa.cantidad}}</td> 
+				<td>{{cosa.categoria}}</td> 
+				<td>{{cosa.fecha}}</td> 
+				<td>{% if cosa.comentario %} {{cosa.comentario}} {% endif %}</td>
+			  </tr>
+			  {% endfor %}
+		    
+			</table>
+		  </div>
+		  
+		  {% else %}
+		  
+		  <p>No se encontro nada</p>
+		  
+		  {% endif %}
+		 </div>
+	  </div>
+{% endblock %}

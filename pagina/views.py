@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.core.urlresolvers import reverse_lazy
 from cosa.models import Cosa
 from categoria.models import Categoria
-from .forms import NuevaCategoriaForm
+from cosa.forms import CrearCosaForm
 
 
 class IndexView(TemplateView):
@@ -13,18 +13,17 @@ class IndexView(TemplateView):
 
 class DashboardView(TemplateView):
     template_name = 'dashboard.html'
-    
+    form_class = CrearCosaForm()
     
     def get(self, request, *args, **kwargs):
         
         cosas = Cosa.objects.filter(user=self.request.user)
-        return render(request, self.template_name, {'cosas': cosas})
+        return render(request, self.template_name, {'cosas': cosas, 'form': self.form_class})
     
     #categorias = Categoria.models.filter(user=self.request.user)
     
     def post(self, request, *args, **kwargs):
         pass
-        #maneja el crear una nueva cosa
 
 
 """
