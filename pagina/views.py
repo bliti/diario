@@ -1,5 +1,5 @@
 from django.http import HttpResponseRedirect
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, View
 from django.shortcuts import render
 from django.core.urlresolvers import reverse_lazy
 from cosa.models import Cosa
