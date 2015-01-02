@@ -46,7 +46,8 @@ class NuevaCategoriaView(TemplateView):
 
         return render(request, self.template_name, {'form': form})
 
-"""
+
 class NuevaCosaView(TemplateView):
     form_class = NuevaCosaForm
     template_name = 'nueva_cosa.html'
+"""

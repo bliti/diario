@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from categoria.models import Categoria
+#from categoria.models import Categoria
 
 
 class Cosa(models.Model):
