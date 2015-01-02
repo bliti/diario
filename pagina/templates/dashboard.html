@@ -24,13 +24,13 @@
     <style>
 	
 		body {
-		  padding-top: 50px;
+		  padding-top: 90px;
 		}
-		.starter-template {
-		  padding: 40px 15px;
-		  text-align: center;
-		}
+
 		
+	    .diario {
+	    	padding-top:50px;
+	    }
     </style>		
   </head>
 
@@ -62,15 +62,60 @@
       </div>
     </nav>
 
-    <div class="container">
-
-      <div class="starter-template">
-        <h1>Diario esta bajo construccion.</h1>
-        <p class="lead">Enviame un email con cualquier pregunta.</p>
-		
-      </div>
+    
+	  
 	  
 	  <div class="container">
+	  	<div class="col-sm-6">
+			<p class="lead">Crear Nuevo</p>
+		
+			<form class="form">
+				{% csrf_token %}
+			  
+			  <div class="form-group">
+			    <label class="sr-only" for="exampleInputAmount">Cantidad (en centavos)</label>
+			    <div class="input-group">
+			      <div class="input-group-addon">Cantidad</div>
+			      <input type="number" class="form-control" id="exampleInputAmount" placeholder="En Centavos" required>
+			    </div>
+			  </div>
+			  
+			  
+			  <div class="form-group">
+			    <label class="sr-only" for="exampleInputAmount">Categoria</label>
+			    <div class="input-group">
+			      <div class="input-group-addon">Categoria</div>
+			      <select class="form-control" id="exampleInputAmount" required>
+					  <option value="recorte">recorte</option>
+					  <option value="recorte">cerquillo</option>
+					  <option value="recorte">afeitar</option>
+					  <option value="recorte">renta silla</option>
+					  
+				  </select>
+			    </div>
+			  </div>
+			  
+			  
+			  
+			  <div class="form-group">
+			    <label class="sr-only" for="exampleInputAmount">Comentario (opcional)</label>
+			    <div class="input-group">
+			      <div class="input-group-addon">Comentario</div>
+			      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Opcional">
+			    </div>
+			  </div>
+			  
+			  <button type="submit" class="btn btn-primary">Crear</button>
+			</form>
+		
+		
+		</div>
+	  </div>
+	  
+	  <div class="container diario">
+		  <div class="col-sm-12">
+  			<p class="lead">Ultimos</p>
+			  
 		  {% if cosas %}
 		  
 		  <div class="table-responsive">
@@ -97,10 +142,10 @@
 		  <p>No se encontro nada</p>
 		  
 		  {% endif %}
-		  
+		 </div>
 	  </div>
 
-    </div><!-- /.container -->
+ 
 
 
     <!-- Bootstrap core JavaScript

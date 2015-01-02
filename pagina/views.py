@@ -21,6 +21,10 @@ class DashboardView(TemplateView):
         return render(request, self.template_name, {'cosas': cosas})
     
     #categorias = Categoria.models.filter(user=self.request.user)
+    
+    def post(self, request, *args, **kwargs):
+        pass
+        #maneja el crear una nueva cosa
 
 
 """
@@ -45,9 +49,4 @@ class NuevaCategoriaView(TemplateView):
             return HttpResponseRedirect(reverse_lazy('dashboard'))
 
         return render(request, self.template_name, {'form': form})
-
-
-class NuevaCosaView(TemplateView):
-    form_class = NuevaCosaForm
-    template_name = 'nueva_cosa.html'
 """
