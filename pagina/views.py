@@ -22,4 +22,16 @@ class DashboardView(TemplateView):
     
     
     def post(self, request, *args, **kwargs):
-        pass
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            
+            cosa = Cosa.objects.create(
+                cantidad=form.cleaned_data['cantidad'],
+                comentario=form.cleaned_data['comentario'],
+                categoria=form.cleaned_data['categoria'],
+                user=self.request.user
+                )
+            
+            return HttpResponseRedirect(reverse_lazy('dashboard'))
+
+        return render(request, self.template_name, {'form': form})
