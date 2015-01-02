@@ -5,7 +5,7 @@
 	  	<div class="col-sm-4">
 			<p class="lead">Crear Nuevo</p>
 		
-			<form class="form" action="" method=".">
+			<form class="form" action="{% url 'crear_categoria' %}" method="post">
 				{% csrf_token %}
 			  
 				{{form.as_p}}

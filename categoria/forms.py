@@ -5,7 +5,7 @@ from django import forms
 class CrearCategoriaForm(forms.Form):
     
     
-    categoria = forms.IntegerField(label="Categoria", widget=forms.TextInput(attrs={
+    categoria = forms.CharField(label="Categoria", widget=forms.TextInput(attrs={
         "class": "form-control",
         "id": "exampleInputAmount", 
         "placeholder": "Ejemplo: Venta de producto",

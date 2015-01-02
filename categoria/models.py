@@ -10,3 +10,7 @@ class Categoria(models.Model):
     fecha = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User)
     
+    
+    def __unicode__(self):
+        return self.categoria
+    

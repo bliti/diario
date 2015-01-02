@@ -16,36 +16,10 @@ class DashboardView(TemplateView):
     form_class = CrearCosaForm()
     
     def get(self, request, *args, **kwargs):
-        
+        self.form_class.fields['categoria'].queryset = Categoria.objects.filter(user=request.user) 
         cosas = Cosa.objects.filter(user=self.request.user)
         return render(request, self.template_name, {'cosas': cosas, 'form': self.form_class})
     
-    #categorias = Categoria.models.filter(user=self.request.user)
     
     def post(self, request, *args, **kwargs):
         pass
-
-
-"""
-class NuevaCategoriaView(TemplateView):
-    form_class = NuevaCategoriaForm
-    template_name = 'nueva_categoria.html'
-    
-    
-    def get(self, request, *args, **kwargs):
-        return render(request, self.template_name, {'form': form_class})
-    
-    
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            
-            categoria = Categoria.objects.create(
-                categoria=form.cleaned_data['categoria']
-                user=self.request.user
-                )
-           
-            return HttpResponseRedirect(reverse_lazy('dashboard'))
-
-        return render(request, self.template_name, {'form': form})
-"""

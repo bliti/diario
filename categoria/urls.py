@@ -4,5 +4,5 @@ from .views import CrearCategoriaView
 
 
 urlpatterns = (
-    url(r'^crear/$', login_required(CrearCategoriaView.as_view()), name='crear_categoria'),
+    url(r'^crear/$', login_required(CrearCategoriaView.as_view()), name='crear_categoria'),    
     )
