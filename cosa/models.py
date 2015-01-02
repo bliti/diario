@@ -11,12 +11,12 @@ class Cosa(models.Model):
     cantidad = models.IntegerField() #todo es en centavos.
     fecha = models.DateTimeField(auto_now_add=True)
     comentario = models.TextField(null=True)
-    categoria = models.TextField()
+    #categoria = models.TextField()
     user = models.ForeignKey(User)
     
     class Meta:
         ordering = ['-pk']
     
     
-    def __unicode__(self):
-        return '{0}{1}'.format(self.categoria, self.cantidad)
+    #def __unicode__(self):
+    #    return '{0}{1}'.format(self.categoria, self.cantidad)

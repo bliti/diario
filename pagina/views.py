@@ -13,10 +13,17 @@ class IndexView(TemplateView):
 
 class DashboardView(TemplateView):
     template_name = 'dashboard.html'
-    cosas = Cosa.objects.filter(user=self.request.user)
-    categorias = Categoria.models.filter(user=self.request.user)
+    
+    
+    def get(self, request, *args, **kwargs):
+        
+        cosas = Cosa.objects.filter(user=self.request.user)
+        return render(request, self.template_name, {'cosas': cosas})
+    
+    #categorias = Categoria.models.filter(user=self.request.user)
 
 
+"""
 class NuevaCategoriaView(TemplateView):
     form_class = NuevaCategoriaForm
     template_name = 'nueva_categoria.html'
@@ -39,8 +46,7 @@ class NuevaCategoriaView(TemplateView):
 
         return render(request, self.template_name, {'form': form})
 
-
+"""
 class NuevaCosaView(TemplateView):
     form_class = NuevaCosaForm
     template_name = 'nueva_cosa.html'
-    

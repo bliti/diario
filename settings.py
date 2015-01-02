@@ -96,6 +96,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 #django-registration
-REGISTRATION_OPEN = True
+REGISTRATION_OPEN = False
+
 
 LOGIN_REDIRECT_URL = '/dashboard/'
