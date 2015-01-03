@@ -5,7 +5,7 @@
 	  	<div class="col-sm-4">
 			<p class="lead">Crear Nuevo</p>
 		
-			<form class="form" action="" method="">
+			<form class="form" action="{% url 'dashboard'%}" method="post">
 				{% csrf_token %}
 			  
 				{{form.as_p}}
@@ -20,7 +20,7 @@
 	  
 	  <div class="container diario">
 		  <div class="col-sm-12">
-  			<p class="lead">Ultimos</p>
+  			<p class="lead">Ultimos 25</p>
 			  
 		  {% if cosas %}
 		  
@@ -36,7 +36,16 @@
 			  	<td>{{cosa.cantidad}}</td> 
 				<td>{{cosa.categoria}}</td> 
 				<td>{{cosa.fecha}}</td> 
-				<td>{% if cosa.comentario %} {{cosa.comentario}} {% endif %}</td>
+				
+				{% if cosa.comentario == "Ninguno" %} 
+				
+				<td class="ninguno">{{cosa.comentario}}</td>
+				
+				{% else %}
+				
+				<td>{{cosa.comentario}}</td>
+				
+				{% endif %}
 			  </tr>
 			  {% endfor %}
 		    

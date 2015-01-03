@@ -13,18 +13,20 @@ class IndexView(TemplateView):
 
 class DashboardView(TemplateView):
     template_name = 'dashboard_main.html'
-    form_class = CrearCosaForm()
+    form_class = CrearCosaForm
     
     def get(self, request, *args, **kwargs):
-        self.form_class.fields['categoria'].queryset = Categoria.objects.filter(user=request.user) 
-        cosas = Cosa.objects.filter(user=self.request.user)
-        return render(request, self.template_name, {'cosas': cosas, 'form': self.form_class})
+        form = self.form_class()
+        form.fields['categoria'].queryset = Categoria.objects.filter(user=request.user) 
+        cosas = Cosa.objects.filter(user=self.request.user)[:25]
+        return render(request, self.template_name, {'cosas': cosas, 'form': form})
     
     
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
+        form.fields['categoria'].queryset = Categoria.objects.filter(user=request.user)
         if form.is_valid():
-            
+                    
             cosa = Cosa.objects.create(
                 cantidad=form.cleaned_data['cantidad'],
                 comentario=form.cleaned_data['comentario'],

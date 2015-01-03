@@ -8,15 +8,15 @@ class CrearCosaForm(forms.Form):
     
     cantidad = forms.IntegerField(label="Cantidad", widget=forms.NumberInput(attrs={
         "class": "form-control",
-        "id": "exampleInputAmount", 
+        "id": "cantidad", 
         "placeholder": "En Centavos",
         "required": "True"
         }))
     
-    categoria = forms.ModelChoiceField(queryset=Categoria.objects.none(), widget=forms.Select(attrs={"class": "form-control"}))
+    categoria = forms.ModelChoiceField(queryset=Categoria.objects.none(), widget=forms.Select(attrs={"class": "form-control", "id": "categoria"}))
     
     comentario = forms.CharField(label="Comentario", widget=forms.TextInput(attrs={
         "class": "form-control input-padding",
-        "id": "exampleInputAmount",
-        "placeholder": "Opcional"
+        "id": "comentario",
+        "value": 'Ninguno'
         }))

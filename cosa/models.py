@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-#from categoria.models import Categoria
+from categoria.models import Categoria
 
 
 class Cosa(models.Model):
@@ -10,7 +10,7 @@ class Cosa(models.Model):
     """
     cantidad = models.IntegerField() #todo es en centavos.
     fecha = models.DateTimeField(auto_now_add=True)
-    comentario = models.TextField(default="Ninguno")
+    comentario = models.TextField()
     categoria = models.TextField()
     user = models.ForeignKey(User)
     
