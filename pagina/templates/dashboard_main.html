@@ -27,7 +27,7 @@
 		  <div class="table-responsive">
 		    <table class="table table-striped">
 		      <tr>
-				  <th>Cantidad</th> <th>Categoria</th> <th>Fecha</th> <th>Comentario</th>
+				  <th>Cantidad</th> <th>Categoria</th> <th>Fecha</th> <th>Comentario</th> <th>Borrar</th>
               </tr>
 		  
 		      {% for cosa in cosas %}
@@ -46,6 +46,18 @@
 				<td>{{cosa.comentario}}</td>
 				
 				{% endif %}
+				
+				<td>
+					<form action="post" method="{% url 'delete_cosa' %}">
+						{% csrf_token %}
+						{{delete_form}}
+						<button type="submit"><i class="fa fa-times"></i></button>
+					</form>
+				
+				
+				</td>
+			  
+			  
 			  </tr>
 			  {% endfor %}
 		    

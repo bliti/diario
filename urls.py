@@ -10,5 +10,5 @@ urlpatterns = patterns('',
     url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^', include('pagina.urls')),
     url(r'^categoria/', include('categoria.urls')),
-    
+    url(r'^cosa/', include('cosa.urls')),
 )

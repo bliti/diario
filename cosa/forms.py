@@ -20,3 +20,12 @@ class CrearCosaForm(forms.Form):
         "id": "comentario",
         "value": 'Ninguno'
         }))
+
+
+class DeleteCosaForm(forms.Form):
+    
+    pk = forms.CharField(widget=forms.HiddenInput(
+        attrs={
+            "value": None
+            }
+        ))

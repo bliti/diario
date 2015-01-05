@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.core.urlresolvers import reverse_lazy
 from cosa.models import Cosa
 from categoria.models import Categoria
-from cosa.forms import CrearCosaForm
+from cosa.forms import CrearCosaForm, DeleteCosaForm
 
 
 class IndexView(TemplateView):
@@ -19,7 +19,10 @@ class DashboardView(TemplateView):
         form = self.form_class()
         form.fields['categoria'].queryset = Categoria.objects.filter(user=request.user) 
         cosas = Cosa.objects.filter(user=self.request.user)[:25]
-        return render(request, self.template_name, {'cosas': cosas, 'form': form})
+        
+        delete_form = DeleteCosaForm
+        
+        return render(request, self.template_name, {'cosas': cosas, 'form': form, 'delete_form': delete_form})
     
     
     def post(self, request, *args, **kwargs):
@@ -37,3 +40,19 @@ class DashboardView(TemplateView):
             return HttpResponseRedirect(reverse_lazy('dashboard'))
 
         return render(request, self.template_name, {'form': form})
+
+
+class DeleteCosaView(View):
+    
+    
+    def get(self, request, *args, **kwargs):
+        return HttpResponseRedirect(reverse_lazy('dashboard'))
+    
+    def post(self, request, *args, **kwargs):
+        form = DeleteCosaForm(request.POST)
+        if form.is_valid():
+            cosa = Cosa.objects.get(pk=form.cleaned_data['pk'])
+            cosa.delete()
+            return HttpResponseRedirect(reverse_lazy('dashboard'))
+        
+        
