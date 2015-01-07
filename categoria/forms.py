@@ -11,3 +11,8 @@ class CrearCategoriaForm(forms.Form):
         "placeholder": "Ejemplo: Venta de producto",
         "required": "True"
         }))
+
+
+class DeleteCategoriaForm(forms.Form):
+    
+    id = forms.CharField(widget=forms.HiddenInput())

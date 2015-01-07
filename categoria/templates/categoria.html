@@ -1,0 +1,53 @@
+{% extends "dashboard.html" %}
+
+{% block content %}
+	  <div class="container">
+	  	<div class="col-sm-4">
+			<p class="lead">Crear Nuevo</p>
+		
+			<form class="form" action="{% url 'crear_categoria' %}" method="post">
+				{% csrf_token %}
+			  
+				{{form.as_p}}
+			  
+			  
+			  <button type="submit" class="btn btn-primary">Crear</button>
+			</form>
+	  	</div>
+  	  </div>
+	  
+	  
+	  <div class="container diario">
+      <p class="lead">Sus Categorias:</p>
+        {% if categorias %}
+      	<table class="table table-striped">
+      	  	<tr>
+		  		<th>Nombre</th> <th>Fecha de Creaci&oacute;n</th> <th>Borrar</th>
+     	  	</tr>
+			
+			
+			
+				{% for categoria in categorias %}
+				<tr>
+					<td>{{categoria.categoria}}</td>
+					<td>{{categoria.fecha}}</td>
+					<td>
+						<form action="{% url 'borrar_categoria' %}" method="post">
+							{% csrf_token %}
+							<input type="hidden" name="id" value="{{categoria.id}}">
+							<button type="submit"><i class="fa fa-times"></i></button>
+						</form>
+				    </td>
+				</tr>
+				{% endfor %}
+			
+			
+	  
+  		</table>
+		
+	  {% else %}
+		<h3 class="text-center">No hay categorias.</h3>
+	  {% endif %}
+	  </div>
+	  
+{% endblock %}
