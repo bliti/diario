@@ -48,9 +48,9 @@
 				{% endif %}
 				
 				<td>
-					<form action="post" method="{% url 'delete_cosa' %}">
+					<form action="{% url 'delete_cosa' %}" method="post">
 						{% csrf_token %}
-						{{delete_form}}
+						<input type="hidden" name="id" value="{{cosa.id}}">
 						<button type="submit"><i class="fa fa-times"></i></button>
 					</form>
 				

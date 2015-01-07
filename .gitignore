@@ -3,6 +3,7 @@
 
 #local settings
 local_settings.py
+todo.txt
 
 #dev db
 *.sqlite3

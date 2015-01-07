@@ -20,9 +20,7 @@ class DashboardView(TemplateView):
         form.fields['categoria'].queryset = Categoria.objects.filter(user=request.user) 
         cosas = Cosa.objects.filter(user=self.request.user)[:25]
         
-        delete_form = DeleteCosaForm
-        
-        return render(request, self.template_name, {'cosas': cosas, 'form': form, 'delete_form': delete_form})
+        return render(request, self.template_name, {'cosas': cosas, 'form': form})
     
     
     def post(self, request, *args, **kwargs):
@@ -51,7 +49,7 @@ class DeleteCosaView(View):
     def post(self, request, *args, **kwargs):
         form = DeleteCosaForm(request.POST)
         if form.is_valid():
-            cosa = Cosa.objects.get(pk=form.cleaned_data['pk'])
+            cosa = Cosa.objects.get(id=form.cleaned_data['id'])
             cosa.delete()
             return HttpResponseRedirect(reverse_lazy('dashboard'))
         

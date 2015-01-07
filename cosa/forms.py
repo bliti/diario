@@ -24,8 +24,4 @@ class CrearCosaForm(forms.Form):
 
 class DeleteCosaForm(forms.Form):
     
-    pk = forms.CharField(widget=forms.HiddenInput(
-        attrs={
-            "value": None
-            }
-        ))
+    id = forms.CharField(widget=forms.HiddenInput())
