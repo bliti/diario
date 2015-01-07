@@ -1,0 +1,99 @@
+{% extends "dashboard.html" %}
+
+{% block content %}
+
+	  <div class="container diario">
+		  <div class="col-sm-12">
+  			<p class="lead">Todas sus Entradas</p>
+			  
+		  {% if cosas %}
+		  
+	      {% if is_paginated %}
+	          <div class="container">
+				  <hr>
+	              <span class="page-links">
+	                  {% if page_obj.has_previous %}
+	                      <a href="{% url 'cosas' %}?page={{ page_obj.previous_page_number }}"><< Previa</a>
+	                  {% endif %}
+	                  <span class="page-current">
+	                      Pagina {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+	                  </span>
+	                  {% if page_obj.has_next %}
+	                      <a href="{% url 'cosas' %}?page={{ page_obj.next_page_number }}">Proxima >></a>
+	                  {% endif %}
+	              </span>
+	          </div>
+	      {% endif %}
+		  
+		  
+		  
+		  <div class="table-responsive">
+		    <table class="table table-striped">
+		      <tr>
+				  <th>#</th> <th>Cantidad</th> <th>Categoria</th> <th>Fecha</th> <th>Comentario</th> <th>Borrar</th>
+              </tr>
+		  
+		      {% for cosa in cosas %}
+			  <tr>
+			  
+		  		<td><strong>{{cosa.id}}</strong></td> 
+			  	<td>{{cosa.cantidad}}</td> 
+				<td>{{cosa.categoria}}</td> 
+				<td>{{cosa.fecha}}</td> 
+				
+				{% if cosa.comentario == "Ninguno" %} 
+				
+				<td class="ninguno">{{cosa.comentario}}</td>
+				
+				{% else %}
+				
+				<td>{{cosa.comentario}}</td>
+				
+				{% endif %}
+				
+				<td>
+					<form action="{% url 'delete_cosa' %}" method="post">
+						{% csrf_token %}
+						<input type="hidden" name="id" value="{{cosa.id}}">
+						<button type="submit"><i class="fa fa-times"></i></button>
+					</form>
+				
+				
+				</td>
+			  
+			  
+			  </tr>
+			  {% endfor %}
+		    
+			</table>
+		  </div>
+		  
+		  
+	      {% if is_paginated %}
+	          <div class="container">
+				  <hr>
+	              <span class="page-links">
+	                  {% if page_obj.has_previous %}
+	                      <a href="{% url 'cosas' %}?page={{ page_obj.previous_page_number }}"><< Previa</a>
+	                  {% endif %}
+	                  <span class="page-current">
+	                      Pagina {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+	                  </span>
+	                  {% if page_obj.has_next %}
+	                      <a href="{% url 'cosas' %}?page={{ page_obj.next_page_number }}">Proxima >></a>
+	                  {% endif %}
+	              </span>
+	          </div>
+	      {% endif %}
+		  
+		  
+		  
+		  
+		  {% else %}
+		  
+		  <p>No se encontro nada</p>
+		  
+		  {% endif %}
+		 </div>
+	  </div>
+{% endblock %}
