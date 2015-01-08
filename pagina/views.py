@@ -2,6 +2,7 @@ from django.http import HttpResponseRedirect
 from django.views.generic import TemplateView, View
 from django.shortcuts import render
 from django.core.urlresolvers import reverse_lazy
+from django.conf import settings
 from datetime import datetime
 from cosa.models import Cosa
 from categoria.models import Categoria
@@ -21,7 +22,7 @@ class DashboardView(TemplateView):
         form.fields['categoria'].queryset = Categoria.objects.filter(user=request.user) 
         
         return render(request, self.template_name, {
-            'cosas': Cosa.objects.filter(user=self.request.user)[:25],
+            'cosas': Cosa.objects.filter(user=self.request.user, fecha__contains=datetime.today().date()), #localiza esta mierda a hoy.
             'form': form,
             'fecha_de_hoy': datetime.today().date()
             })
@@ -30,6 +31,7 @@ class DashboardView(TemplateView):
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
         form.fields['categoria'].queryset = Categoria.objects.filter(user=request.user)
+        
         if form.is_valid():
             
             cosa = Cosa.objects.create(
@@ -42,7 +44,7 @@ class DashboardView(TemplateView):
             return HttpResponseRedirect(reverse_lazy('dashboard'))
 
         return render(request, self.template_name, {
-            'cosas': Cosa.objects.filter(user=self.request.user)[:25],
+            'cosas': Cosa.objects.filter(user=self.request.user, fecha__contains=datetime.today().date()), #localiza esta mierda a hoy.
             'form': form,
             'fecha_de_hoy': datetime.today().date()
             })
