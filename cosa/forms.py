@@ -15,10 +15,10 @@ class CrearCosaForm(forms.Form):
     
     categoria = forms.ModelChoiceField(queryset=Categoria.objects.none(), widget=forms.Select(attrs={"class": "form-control", "id": "categoria"}))
     
-    comentario = forms.CharField(label="Comentario", widget=forms.TextInput(attrs={
+    comentario = forms.CharField(label="Comentario", required=False, widget=forms.TextInput(attrs={
         "class": "form-control input-padding",
         "id": "comentario",
-        "value": 'Ninguno'
+        "placeholder": "Ninguno"
         }))
 
 

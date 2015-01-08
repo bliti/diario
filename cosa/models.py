@@ -18,5 +18,5 @@ class Cosa(models.Model):
         ordering = ['-pk']
     
     
-    #def __unicode__(self):
-    #    return '{0}{1}'.format(self.categoria, self.cantidad)
+    def __unicode__(self):
+        return '{0}, {1}'.format(self.categoria, self.cantidad)

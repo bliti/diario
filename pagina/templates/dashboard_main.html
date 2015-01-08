@@ -20,7 +20,7 @@
 	  
 	  <div class="container diario">
 		  <div class="col-sm-12">
-  			<p class="lead">Ultimos 25</p>
+  			<p class="lead">Entradas de hoy: {{fecha_de_hoy}}</p>
 			  
 		  {% if cosas %}
 		  
@@ -37,9 +37,9 @@
 				<td>{{cosa.categoria}}</td> 
 				<td>{{cosa.fecha}}</td> 
 				
-				{% if cosa.comentario == "Ninguno" %} 
+				{% if cosa.comentario == "" %} 
 				
-				<td class="ninguno">{{cosa.comentario}}</td>
+				<td class="ninguno">Ninguno</td>
 				
 				{% else %}
 				
