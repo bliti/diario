@@ -3,7 +3,7 @@ from django.views.generic import TemplateView, View
 from django.shortcuts import render
 from django.core.urlresolvers import reverse_lazy
 from django.conf import settings
-from datetime import datetime
+from django.utils import timezone
 from cosa.models import Cosa
 from categoria.models import Categoria
 from cosa.forms import CrearCosaForm, DeleteCosaForm
@@ -22,9 +22,9 @@ class DashboardView(TemplateView):
         form.fields['categoria'].queryset = Categoria.objects.filter(user=request.user) 
         
         return render(request, self.template_name, {
-            'cosas': Cosa.objects.filter(user=self.request.user, fecha__contains=datetime.today().date()), #localiza esta mierda a hoy.
+            'cosas': Cosa.objects.filter(user=self.request.user, fecha__contains=timezone.now().date()),
             'form': form,
-            'fecha_de_hoy': datetime.today().date()
+            'fecha_de_hoy': timezone.now().date()
             })
     
     
@@ -44,9 +44,9 @@ class DashboardView(TemplateView):
             return HttpResponseRedirect(reverse_lazy('dashboard'))
 
         return render(request, self.template_name, {
-            'cosas': Cosa.objects.filter(user=self.request.user, fecha__contains=datetime.today().date()), #localiza esta mierda a hoy.
+            'cosas': Cosa.objects.filter(user=self.request.user, fecha__contains=timezone.now().date()), #localiza esta mierda a hoy.
             'form': form,
-            'fecha_de_hoy': datetime.today().date()
+            'fecha_de_hoy': timezone.now().date()
             })
 
 

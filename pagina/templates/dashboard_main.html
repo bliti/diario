@@ -35,7 +35,7 @@
 			  
 			  	<td>{{cosa.cantidad}}</td> 
 				<td>{{cosa.categoria}}</td> 
-				<td>{{cosa.fecha}}</td> 
+				<td>{{cosa.fecha|date:"D d M Y P"}}</td> 
 				
 				{% if cosa.comentario == "" %} 
 				
