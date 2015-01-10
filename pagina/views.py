@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.core.urlresolvers import reverse_lazy
 from django.conf import settings
 from django.utils import timezone
-from cosa.models import Cosa
+from cosa.models import Cosa, SumarCantidad
 from categoria.models import Categoria
 from cosa.forms import CrearCosaForm, DeleteCosaForm
 
@@ -19,12 +19,16 @@ class DashboardView(TemplateView):
     
     def get(self, request, *args, **kwargs):
         form = self.form_class()
-        form.fields['categoria'].queryset = Categoria.objects.filter(user=request.user) 
+        form.fields['categoria'].queryset = Categoria.objects.filter(user=request.user)
+        
+        cosas = Cosa.objects.filter(user=self.request.user, fecha__contains=timezone.now().date())
+        total = SumarCantidad(cosas)
         
         return render(request, self.template_name, {
-            'cosas': Cosa.objects.filter(user=self.request.user, fecha__contains=timezone.now().date()),
+            'cosas': cosas,
             'form': form,
-            'fecha_de_hoy': timezone.now().date()
+            'fecha_de_hoy': timezone.now().date(),
+            'total': total.total
             })
     
     
@@ -42,9 +46,14 @@ class DashboardView(TemplateView):
                 )
             
             return HttpResponseRedirect(reverse_lazy('dashboard'))
+        
+        
+        #this gets the data shown in GET when the form fails.
+        #ugly. fix it.
+        cosas = Cosa.objects.filter(user=self.request.user, fecha__contains=timezone.now().date())
 
         return render(request, self.template_name, {
-            'cosas': Cosa.objects.filter(user=self.request.user, fecha__contains=timezone.now().date()), #localiza esta mierda a hoy.
+            'cosas': cosas, 
             'form': form,
             'fecha_de_hoy': timezone.now().date()
             })
@@ -56,11 +65,10 @@ class DeleteCosaView(View):
     def get(self, request, *args, **kwargs):
         return HttpResponseRedirect(reverse_lazy('dashboard'))
     
+    
     def post(self, request, *args, **kwargs):
         form = DeleteCosaForm(request.POST)
         if form.is_valid():
             cosa = Cosa.objects.get(id=form.cleaned_data['id'])
             cosa.delete()
             return HttpResponseRedirect(reverse_lazy('dashboard'))
-        
-        

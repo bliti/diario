@@ -19,4 +19,19 @@ class Cosa(models.Model):
     
     
     def __unicode__(self):
-        return '{0}, {1}'.format(self.categoria, self.cantidad)
+        return self.cantidad
+
+
+class SumarCantidad(object):
+    """
+    Takes in a Cosa queryset
+    and sum the cantidad field
+    to return a total.
+    """
+    
+    def __init__(self, cosas):
+        """
+        cosas queryset = Cosa Objects.
+        """
+        self.total = sum([cosa.cantidad for cosa in cosas])
+        
