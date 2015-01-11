@@ -22,13 +22,14 @@ class DashboardView(TemplateView):
         form.fields['categoria'].queryset = Categoria.objects.filter(user=request.user)
         
         cosas = Cosa.objects.filter(user=self.request.user, fecha__contains=timezone.now().date())
-        total = SumarCantidad(cosas)
+        
+        #suma las ventas del dia
+        total_cosas = SumarCantidad(cosas)
         
         return render(request, self.template_name, {
             'cosas': cosas,
             'form': form,
-            'fecha_de_hoy': timezone.now().date(),
-            'total': total.total
+            'total': total_cosas.total
             })
     
     
@@ -51,11 +52,12 @@ class DashboardView(TemplateView):
         #this gets the data shown in GET when the form fails.
         #ugly. fix it.
         cosas = Cosa.objects.filter(user=self.request.user, fecha__contains=timezone.now().date())
+        total_cosas = SumarCantidad(cosas)
 
         return render(request, self.template_name, {
             'cosas': cosas, 
             'form': form,
-            'fecha_de_hoy': timezone.now().date()
+            'total': total_cosas.total
             })
 
 
