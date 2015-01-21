@@ -35,7 +35,7 @@ except ImportError:
 
 TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://diarioapp.herokuapp.com/']
 
 
 # Application definition
@@ -84,8 +84,9 @@ if DEBUG:
 else:
     # Parse database configuration from $DATABASE_URL
     import dj_database_url
-    DATABASES['default'] =  dj_database_url.config()
-
+    DATABASES = {
+        'default': dj_database_url.config()
+    }
 
 
 # Internationalization
